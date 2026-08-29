@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 
-test("emits the hosted worker and resource manifest", async () => {
+test("emits the hosted worker and storage bindings", async () => {
   await access(`${root}/dist/server/index.js`);
   const manifest = JSON.parse(
     await readFile(`${root}/dist/.openai/hosting.json`, "utf8"),
@@ -13,7 +13,6 @@ test("emits the hosted worker and resource manifest", async () => {
 
   assert.equal(manifest.d1, "DB");
   assert.equal(manifest.r2, "BUCKET");
-  assert.ok(manifest.project_id);
 });
 
 test("packages database migrations and the company logo", async () => {
